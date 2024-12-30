@@ -5,8 +5,8 @@ from random import randint
 import pandas as pd
 import time
 
-BASE_URL = "https://store.steampowered.com/appreviews/2767030"  # Replace 123456 with the actual Marvel Rivals App ID
-max_pages = 3
+BASE_URL = "https://store.steampowered.com/appreviews/12345?json=1"  # Replace 12345 with the relevant App ID
+max_pages = 10
 
 def scrape_reviews(base_url, max_pages):
     reviews = []  # Initialize an empty list to store reviews
@@ -18,9 +18,8 @@ def scrape_reviews(base_url, max_pages):
         params = {
             "json": 1,  # Request JSON format for easier parsing
             "cursor": cursor,  # Pagination cursor
-            "language": "all",  # Language filter
+            "language": "english",  # Language filter
             "filter": "recent",  # Sort by most recent reviews
-            "day_range": 365,
         }
         
         # Fetch data from Steam API
@@ -73,7 +72,7 @@ scraped_reviews = scrape_reviews(BASE_URL, max_pages)
 if scraped_reviews:
     reviews_df = pd.DataFrame(scraped_reviews)
     reviews_df["timestamp"] = pd.to_datetime(reviews_df["timestamp"], unit="s", errors="coerce")
-    reviews_df.to_csv("marvel_rivals_reviews.csv", index=False)
+    reviews_df.to_csv("data/raw/reviews.csv", index=False) # Replace "reviews" with the title of the relevant game
     print("Scraping complete. Reviews saved to marvel_rivals_reviews.csv")
 else:
     print("No reviews found.")
