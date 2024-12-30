@@ -5,7 +5,7 @@ from random import randint
 import pandas as pd
 import time
 
-BASE_URL = "https://store.steampowered.com/appreviews/2767030?json=1"  # Replace 12345 with the relevant App ID
+BASE_URL = "https://store.steampowered.com/appreviews/2357570?json=1"  # Replace 12345 with the relevant App ID
 max_pages = 10
 
 def scrape_reviews(base_url, max_pages):
@@ -72,7 +72,7 @@ scraped_reviews = scrape_reviews(BASE_URL, max_pages)
 if scraped_reviews:
     reviews_df = pd.DataFrame(scraped_reviews)
     reviews_df["timestamp"] = pd.to_datetime(reviews_df["timestamp"], unit="s", errors="coerce")
-    reviews_df.to_csv("data/raw/raw_reviews_Rivals.csv", index=False)
+    reviews_df.to_csv("data/raw/raw_reviews_OW2.csv", index=False)
     print("Scraping complete. Reviews saved to CSV file")
 else:
     print("No reviews found.")

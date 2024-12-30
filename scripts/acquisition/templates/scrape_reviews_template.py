@@ -72,8 +72,8 @@ scraped_reviews = scrape_reviews(BASE_URL, max_pages)
 if scraped_reviews:
     reviews_df = pd.DataFrame(scraped_reviews)
     reviews_df["timestamp"] = pd.to_datetime(reviews_df["timestamp"], unit="s", errors="coerce")
-    reviews_df.to_csv("data/raw/reviews.csv", index=False) # Replace "reviews" with the title of the relevant game
-    print("Scraping complete. Reviews saved to marvel_rivals_reviews.csv")
+    reviews_df.to_csv("data/raw/raw_reviews.csv", index=False) # Add the title of the relevant game to the end of "raw_reviews".
+    print("Scraping complete. Reviews saved to CSV file")
 else:
     print("No reviews found.")
     
