@@ -5,7 +5,7 @@ import time
 import pandas as pd
 
 # Set up Selenium WebDriver
-driver_path = "path_to_your_chromedriver"  # Replace with your ChromeDriver path
+driver_path = "C:/Users/eblad/Downloads/chromedriver-win64/chromedriver-win64/chromedriver.exe"  # Replace with your ChromeDriver path
 service = Service(driver_path)
 driver = webdriver.Chrome(service=service)
 
@@ -24,9 +24,18 @@ time.sleep(5)
 reviews = []
 review_elements = driver.find_elements(By.CLASS_NAME, "review_box")  # Adjust class name if necessary
 for review in review_elements:
-    user = review.find_element(By.CLASS_NAME, "review_author").text
-    content = review.find_element(By.CLASS_NAME, "content").text
-    helpful_count = review.find_element(By.CLASS_NAME, "found_helpful_count").text
+    try:
+        user = review.find_element(By.CLASS_NAME, "review_author").text
+    except:
+        user = "N/A"
+    try:
+        content = review.find_element(By.CLASS_NAME, "content").text
+    except:
+        content = "N/A"
+    try:
+        helpful_count = review.find_element(By.CLASS_NAME, "found_helpful_count").text
+    except:
+        helpful_count = "N/A"
     reviews.append({"user": user, "content": content, "helpful_count": helpful_count})
 
 # Close the browser
@@ -34,5 +43,5 @@ driver.quit()
 
 # Save to a DataFrame
 reviews_df = pd.DataFrame(reviews)
-reviews_df.to_csv("steam_reviews.csv", index=False)
+reviews_df.to_csv("data/raw/raw_reviews_Rivals.csv", index=False)
 print("Scraping complete. Reviews saved to steam_reviews.csv")

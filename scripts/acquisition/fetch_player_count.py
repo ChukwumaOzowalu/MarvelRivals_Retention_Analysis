@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import time
 
+
 # Prompt the user for their Steam API key
 API_KEY = input("Please enter your Steam API key: ")
 

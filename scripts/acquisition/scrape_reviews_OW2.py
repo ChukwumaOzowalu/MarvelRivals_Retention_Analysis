@@ -4,6 +4,9 @@ from datetime import datetime
 from random import randint
 import pandas as pd
 import time
+import sys
+
+sys.stdout.reconfigure(encoding='utf-8')
 
 BASE_URL = "https://store.steampowered.com/appreviews/2357570?json=1"  # Replace 12345 with the relevant App ID
 max_pages = 10
